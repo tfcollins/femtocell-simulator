@@ -1,6 +1,6 @@
 % sim2
-% clear all;
-
+close all;
+clear all;
 
 aps = 100;
 spacing = 10; % meters
@@ -16,13 +16,16 @@ for ap = 1:aps
     AccessPoints{ap}.attachedNodes = 1;
     
     possibleChannelBandwidths = [1.4, 3, 5, 10, 15, 20]'*1e6;
-    key = randi([1 length(possibleChannelBandwidths)]);
+    %key = randi([1 length(possibleChannelBandwidths)]);
+    key = 1;
     AccessPoints{ap}.apChannelBandwidth = possibleChannelBandwidths(key);
-    
+    AccessPoints{ap}.resourceGrid = generateGrid(AccessPoints{ap}.apChannelBandwidth);
     AccessPoints{ap}.apPosition = [apPositions(ap,2),apPositions(ap,1)];   
 end
+
 % View node arrangement
-viewPositions( [aps,aps], AccessPoints, 1)
+viewPositions( [spacing*10,spacing*10], AccessPoints, 1)
+pause(4);
 
 % Pathloss Info
 linkInfo = getPathlossPairs([apPositions;observerPosition]);
@@ -33,14 +36,16 @@ frames = 100;
 for frame = 1:frames
     
     for ap = 1:aps
-        AllpathlossPairs = linkInfo
+        AccessPoints{ap}.AllpathlossPairs = linkInfo;
+        AccessPoints{ap}.AllAPs = AccessPoints;
         AccessPoints{ap}.step(1);
         %AccessPoints{ap}.viewGrid
         %pause(4);
     end
     observer = aps+1;
-    comboGrid = combinedGrids(AccessPoints,linkInfo,observer);
+    [comboGrid, channelUsageGrid] = combinedGrids(AccessPoints,linkInfo,observer);
     viewGrid(comboGrid, 2);
+    viewPRBUsage(channelUsageGrid)
     
-    pause(4);
+    pause(1);
 end
