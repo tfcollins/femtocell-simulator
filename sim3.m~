@@ -1,0 +1,19 @@
+%sim3
+% The goal of this simulation is to measure the interference at one node
+
+% Arrange node around one another
+gridSize = [100, 100];
+numAPs = 1000;
+arrangement = 'uniform';
+apPositions = arrangeAPs(gridSize, arrangement, numAPs);
+observerPosition = [50, 50];
+% Setup all AP instances
+AccessPoints = InitializeAPs(numAPs,apPositions);
+% View positions
+viewPositions(gridSize.*1.0, AccessPoints, 1, observerPosition);
+
+% Pathloss Info
+linkInfo = getPathlossPairs([apPositions;observerPosition]);
+
+% Can we formulate a bound or mean interference level for each Resource
+% block

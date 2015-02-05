@@ -78,6 +78,7 @@
 
 \usepackage{graphicx} % Allows including images
 \usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+\usepackage{wrapfig}
 
 %----------------------------------------------------------------------------------------
 %	TITLE PAGE
@@ -125,7 +126,7 @@ Worcester Polyntechnic Institute \\ % Your institution for the title page
     \item LTE comes in flavors of both TDD and FDD (FDD will be focused on since it can be simplier to evaluate and explain)
     \item Bandwidths from 1.4MHz to 20MHz
     \item Resource Blocks can be QPSK, 16QAM, 64QAM
-    \item Turbocoding rates from 1/2 to 948/1024
+    \item Turbocoding rates from 1/2 to 948/1024 (Puncturing when necessary)
   \end{itemize}
 \end{frame}
 
@@ -154,7 +155,23 @@ Worcester Polyntechnic Institute \\ % Your institution for the title page
 %------------------------------------------------
 
 \begin{frame}
-\frametitle{Interference}
+\frametitle{Femtocells}
+%\begin{columns}
+%\column{0.48\linewidth}
+%\column{0.48\linewidth}
+\centering
+\includegraphics[width=0.8\linewidth]{images/femto.png}
+\begin{itemize}
+  \item Cheap with small transmission range
+  \item Reduce load on Macrocells
+  \item Provide service to residential dead zones
+\end{itemize}
+%\end{columns}
+\end{frame}
+
+%------------------------------------------------
+\begin{frame}
+\frametitle{Interference Problems}
 
 \begin{block}{Inter-cell (Among)}
 \begin{itemize}
@@ -174,12 +191,53 @@ Worcester Polyntechnic Institute \\ % Your institution for the title page
 \end{frame}
 
 %------------------------------------------------
+
+\begin{frame}
+\frametitle{Current Approaches for Femtocell Interference}
+\begin{block}{Split Bands}
+\begin{itemize}
+  \item Macro users get bands A-C and Femto users get bands D-E
+  \item \textbf{Pros}: Simple to implement and no co-channel interference
+  \item \textbf{Cos}: Spectrally inefficient
+\end{itemize}
+\end{block}
+%\end{columns}
+\begin{block}{Shared Bands}
+\begin{itemize}
+  \item Both share all bands, Macro transmits deterministic ABS to lower cell edge transmissions
+  \item \textbf{Pros}: All users can use all bands
+  \item \textbf{Cos}: Co-channel interference, coordination required
+\end{itemize}
+\end{block}
+
+\end{frame}
+
+%------------------------------------------------
 \section{Simulator}
 %------------------------------------------------
 
 \begin{frame}
   \frametitle{Overview} % Table of contents slide, comment this block out to remove it
   \tableofcontents % Throughout your presentation, if you choose to use \section{} and \subsection{} commands, these will automatically be printed on this slide as an overview of your presentation
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Goal}
+\begin{itemize}
+  \item Model interference between Femtocells
+  \item Impacts of interference on network
+  \item Avoidance with minimal changes to network operation
+\end{itemize}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Scenarios of Interest}
+\centering
+\includegraphics[width=0.8\linewidth]{images/femto.png}
 \end{frame}
 
 %------------------------------------------------
@@ -194,6 +252,7 @@ Worcester Polyntechnic Institute \\ % Your institution for the title page
   \item Resource blocks utilization is monitored simulation wide
   \item AP's can have custom positions
   \item Nodes can have customized tasks (aka VOIP, Web, etc...)
+  \item Scheduler is Round Robin based (first come first serve)
 \end{itemize}
 \end{block}
 
@@ -201,7 +260,6 @@ Worcester Polyntechnic Institute \\ % Your institution for the title page
   \begin{itemize}
     \item Sensing is non-realistic (Not traditional to LTE)
     \item AP's are assumed synchronized, not realistic
-    \item Scheduler needs to be more streamlined
   \end{itemize}
 \end{block}
 
@@ -219,6 +277,24 @@ Worcester Polyntechnic Institute \\ % Your institution for the title page
   \item Smart scheduling
   \item Can sensing be done? Does it provide any advantage?
 \end{itemize}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Scheduler Operation}
+\begin{center}
+\includegraphics[height=0.65\linewidth]{images/lte_schedular_start.pdf}
+\end{center}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Scheduler Operation}
+\begin{center}
+\includegraphics[height=0.65\linewidth]{images/lte_schedular_allocate.pdf}
+\end{center}
 \end{frame}
 
 %------------------------------------------------
