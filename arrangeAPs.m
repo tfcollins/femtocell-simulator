@@ -1,0 +1,41 @@
+function apPositions = arrangeAPs(gridSize, arrangement, numAPs)
+
+% Uniformly distributed arround node
+switch arrangement
+    case 'uniform'
+        a = 0;b = gridSize(2);
+        apPositions = a + (b-a).*rand(numAPs-1,1);
+        a = 0;b = gridSize(2);
+        apPositions = [apPositions, a + (b-a).*rand(numAPs-1,1)];
+        midPoint = gridSize./2;
+        apPositions = [apPositions;midPoint];
+    case 'blocks'
+        gridBlocks = gridSize(1)*gridSize(2);
+        midPoint = gridSize./2;
+        Xnodes = numAPs*(gridSize(1)/gridBlocks);
+        Ynodes = 10;
+        Xspacing = 10;
+        Yspacing = 10;
+        apPositions = [];
+        % Place
+        nodesPlaced = 0;
+        for x = -Xnodes/2:1:(Xnodes/2-1)
+            for y = -Ynodes/2:1:(Ynodes/2-1)
+                
+                Xpos = midPoint(1) + x*Xspacing;
+                Ypos = midPoint(2) + y*Yspacing;
+                if nodesPlaced < (numAPs) && sum(midPoint~=[Xpos,Ypos])
+                    apPositions = [apPositions;[Xpos,Ypos]];
+                    nodesPlaced = nodesPlaced + 1;
+                end
+            end
+        end
+        apPositions = [apPositions;midPoint];
+end
+
+
+
+
+
+
+end

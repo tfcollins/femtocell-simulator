@@ -3,20 +3,19 @@ classdef AccessPoint < matlab.System
     % ToDo:
     % 1. PRB placement smartly or ok-smartly
     % 2. Enviromental variablity (Sensing)+++
-    % 3. Fixed offset in time for voice calls
     % 4. Graph showing PRBs in use, not power levels (Easier to look at)+++
         % Possible histogram
     % 5. Update of coderate and modulation based on enviroment
     % 6. Need to consider spread trade-off when replacing blocks
         
     % Bugs:
-    % 1. Some allocation problem causing crashes
-    
+    % 1. Some allocation problem causing crashes (Fixed)
     
     % Assumption:
     % 1. All channels are stack in the same band
     % 2. if channels are smaller they occupy same spectrum location
     % 3. Nodes cannot end a task and start a new one in the same frame
+    % 4. Scheduler is round robin approach
     
     % Features:
     % 1. Voice calls try to allocate a resource block with the same time
