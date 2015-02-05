@@ -79,6 +79,8 @@
 \usepackage{graphicx} % Allows including images
 \usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
 \usepackage{wrapfig}
+\usepackage{amsmath}
+\usepackage{mathtools}
 
 %----------------------------------------------------------------------------------------
 %	TITLE PAGE
@@ -295,6 +297,43 @@ Worcester Polyntechnic Institute \\ % Your institution for the title page
 \begin{center}
 \includegraphics[height=0.65\linewidth]{images/lte_schedular_allocate.pdf}
 \end{center}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{VoLTE Allocation}
+\begin{center}
+\includegraphics[height=0.65\linewidth]{images/volte.png}
+\end{center}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Web Download Allocation}
+\begin{center}
+\includegraphics[width=0.8\linewidth]{images/webdl-crop.pdf}
+\end{center}
+\end{frame}
+
+%------------------------------------------------
+
+\begin{frame}
+\frametitle{Modeling of Grid/Resource Usage}
+\begin{itemize}
+  \item Users allocate a group of resources with a probability $p\left( x \right) = \frac{{e^{ - \lambda } \lambda ^x }}{{x!}}$
+  \begin{itemize}
+    \item $\lambda = \sum\lambda_{event}$
+    \item $\lambda$ is dependent on the number of users connected to each Femtocell
+  \end{itemize}
+  \item The probability of network saturation is $P(x) = 1 - \frac{\Gamma (\floor{x+1},\lambda)}{\floor{k}!}$
+  \begin{itemize}
+    \item The index $x$ is determined by the bandwidth and channel conditions
+  \end{itemize}
+  \item This only discribes the density of the grid, not the individual PRBs
+  \item If PRBs are scheduled without channel information $P(x)$ should be a good estimate of their allocation probability with $x$ being that PRBs location
+\end{itemize}
 \end{frame}
 
 %------------------------------------------------
