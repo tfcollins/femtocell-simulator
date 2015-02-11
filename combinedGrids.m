@@ -43,7 +43,7 @@ for AP = 1:aps
     
     % Apply to received grid at observation node
     marker = 100;
-    combinedGrid  = combinedGrid + tmpGrid*Rx_Power/marker;
+    combinedGrid  = combinedGrid + tmpGrid.*Rx_Power/marker;
 
     channelUsageGrid = channelUsageGrid + (tmpGrid~=0);
     
